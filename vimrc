@@ -1,17 +1,35 @@
-set nocompatible
 set number
 set ic
 syntax on
 colorscheme desert
 set list
 set listchars=tab:>.,trail:~,eol:↲,extends:>,precedes:<,nbsp:%
-set tabstop=2
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set directory=$HOME/.vim/swapfiles/
 set clipboard=unnamed
+set hlsearch
+set backup
+set backupdir=$HOME/.vim/backupfiles/
+set writebackup
 
-imap { {}<LEFT>
-imap [ []<LEFT>
-imap ( ()<LEFT>
+if has('persistent_undo')
+  set undofile
+  set undodir=$HOME/.vim/undofiles/
+endif
+
+if has("autocmd")
+  augroup redhat
+    " In text files, always limit the width of text to 78 characters
+    autocmd BufRead *.txt set tw=78
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+  augroup END
+endif
 
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
