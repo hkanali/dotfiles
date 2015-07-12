@@ -49,6 +49,10 @@ if has('syntax')
     call ZenkakuSpace()
 endif
 
+" visual モードで連続して、インデント出来るように設定
+vnoremap <silent> > >gv
+vnoremap <silent> < <gv
+
 "NeoBundle Scripts-----------------------------
 if has('vim_starting')
   if &compatible
